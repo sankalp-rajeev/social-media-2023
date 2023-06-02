@@ -1,0 +1,173 @@
+/* General styles */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  background-color: #f4f4f4;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.navigation-bar {
+  background-color: #333;
+  overflow: hidden;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  list-style: none;
+}
+
+.navigation-bar .list-items {
+  list-style: none;
+  display: flex;
+  position: relative;
+  text-align: center;
+}
+
+.navigation-bar .list-items .item {
+  flex: 1 0 1px;
+  position: relative;
+  z-index: 2;
+}
+
+nav a {
+  display: inline-block;
+  height: 4rem;
+  width: 4.5rem;
+  line-height: 4.5;
+  text-align: center;
+  color: #acb8c1;
+}
+
+nav a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+nav a.active {
+  background-color: #04AA6D;
+  color: white;
+}
+
+/* User profile section */
+
+.user-stats {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #fafafa;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.user-stats span {
+  margin: 0 10px;
+}
+
+.user-stats .followers {
+  color: #1e90ff;
+}
+
+.user-stats .following {
+  color: #ff69b4;
+}
+
+.user-name {
+  font-size: 25px;
+}
+
+/* Followers list section */
+
+.followers-list {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #fafafa;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.followers-list h3 {
+  margin-bottom: 10px;
+}
+
+.followers-list ul {
+  list-style: none;
+  padding-left: 20px;
+}
+
+.followers-list li {
+  margin-bottom: 5px;
+}
+
+/* Top contributors section */
+
+.top-contributors {
+  margin-top: 20px;
+  padding: 10px;
+  background-color: #fafafa;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.top-contributors h3 {
+  margin-bottom: 10px;
+}
+
+.top-contributors table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.top-contributors th {
+  text-align: left;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+}
+
+.top-contributors td {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.top-contributors tr:hover {
+  background-color: #f5f5f5;
+}
+
+.top-contributors .rank {
+  width: 5%;
+}
+
+.top-contributors .name {
+  width: 75%;
+}
+
+.top-contributors .contribution {
+  width: 20%;
+  text-align: right;
+}
+
+@media screen and (max-width: 768px) {
+  .top-contributors {
+    overflow-x: auto;
+  }
+
+  .top-contributors table {
+    width: auto;
+  }
+}

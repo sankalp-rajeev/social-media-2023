@@ -1,0 +1,53 @@
+const express = require('express');
+const bcrypt = require('bcrypt');
+const app = express();
+const port = 3000;
+
+// Set up middleware for parsing request body
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Mock users database
+const users = [
+  {
+    id: 1,
+    email: 'user1@example.com',
+    password: '$2b$10$5m1ahkZYnDl4W8.sF4xHveLd4vCGaEVJW8gt5VB5dw5.u5c2JUZ1W', // hashed version of 'password'
+  },
+  {
+    id: 2,
+    email: 'user2@example.com',
+    password: '$2b$10$TJHgf7Ez2bcY1G/PlJhncub/bjqFdVv.0/vmWtLQ2mIZGZwVYBOLi', // hashed version of 'password'
+  },
+];
+
+// Login route
+app.post('/login', async (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
+
+  // Find user with matching email
+  const user = users.find((u) => u.email === email);
+
+  if (!user) {
+    // No user found with the provided email
+    res.status(401).send('Invalid email or password');
+    return;
+  }
+
+  // Compare password hashes
+  const match = await bcrypt.compare(password, user.password);
+
+  if (match) {
+    // Passwords match, user is authenticated
+    res.redirect('/explore.html');
+  } else {
+    // Passwords do not match
+    res.status(401).send('Invalid email or password');
+  }
+});
+
+// Start server
+app.listen(port, () => {
+  console.log(`Server listening at http://localhost:${port}`);
+});

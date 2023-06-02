@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="frontend.css">
+    <title>Photos</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navigation-bar">
+            <ul class="list-items">
+                <li class="item"><a href="explore.html">Explore</a></li>
+                <li class="item"><a href="photos.ejs">Photos</a></li>
+                <li class="item"><a href="album.html" class="active">Album</a></li>
+                <li class="item"><a href="search.html">Search</a></li>
+                <li class="item"><a href="profile.ejs">Profile</a></li>
+                <li class="item"><button id="logout-btn" class="logout-button">Logout</button></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="app">
+        <link rel="stylesheet" href="test.css">
+        <div>
+            <h2>Upload images</h2>
+            <div class="server-message"></div>
+        </div>
+
+        <div class="input-div">
+            <p>Upload here <span class="browse">Browse</span></p>
+            <input type="file" class="file" multiple="multiple" accept="image/png, image/jpeg, image/jpg">
+        </div>
+        <form id="saved-form">
+            <div class="header">
+                <h3>Saved</h3>
+                <button type="submit">Delete</button>
+            </div>
+            <div class="saved-div"></div>
+        </form>
+
+        <form action="/addTags" method="POST" onsubmit="return validateForm()">
+            <div>
+                <!--  -->
+                <label>Tags:</label>
+                <input type="text" id="tags" name="tagName" maxlength="50" placeholder="Add a tag ...">
+                <button type="submit">Add tag</button>
+            </div>
+            <!--  -->
+        </form>
+        <form id="queued-form" action="/upload/MyPhotos" method="POST">
+
+            <div class="header">
+                <h3>Click to upload the images</h3>
+                <button type="submit">Upload</button>
+            </div>
+            <div class="queued-div"></div>
+        </form>
+    </main>
+    <script>
+        document.getElementById("logout-btn").addEventListener("click", function() {
+            window.location.href = "/index.html";
+        });
+    </script>
+    <script>
+        const savedPhotoIds = JSON.parse('<%- JSON.stringify(photo_ids) %>');
+
+
+    </script>
+
+    <script>
+        let queuedImageArray = [],
+            savedForm = document.querySelector("#saved-form"),
+            queuedForm = document.querySelector("#queued-form"),
+            savedDiv = document.querySelector(".saved-div"),
+            queuedDiv = document.querySelector(".queued-div"),
+            inputDiv = document.querySelector(".input-div"),
+            input = document.querySelector(".input-div input"),
+            serverMessage = document.querySelector(".server-message"),
+            savedImages = JSON.parse('<%-JSON.stringify(photo_ids)%>'),
+            deleteImages = [];
+
+        if (savedPhotoIds) displaySavedImages()
+
+
+
+        function displaySavedImages() {
+            let images = "";
+            savedPhotoIds.forEach((photo_id, index) => {
+                images += `<div class="image">
+                                <img src="/image/${photo_id}" alt="image">
+                                <span onclick="deleteSavedImage(${index})">&times;</span>
+                            </div>`;
+            });
+            savedDiv.innerHTML = images;
+        }
+
+
+
+
+        function deleteSavedImage(index) {
+            deleteImages.push(savedImages[index])
+            savedImages.splice(index, 1)
+            displaySavedImages()
+        }
+
+        savedForm.addEventListener("submit", (e) => {
+            deleteImagesFromServer()
+        })
+
+        function deleteImagesFromServer() {
+            const promises = deleteImages.map(photo_id => {
+                return fetch(`/deletePhoto/${photo_id}`, {
+                    method: "DELETE",
+                })
+                    .then(response => {
+                        if (response.status !== 200) {
+                            throw Error(response.statusText);
+                        }
+                        return response;
+                    });
+            });
+
+            Promise.all(promises)
+                .then(() => {
+                    deleteImages = [];
+                    serverMessage.innerHTML = "Images deleted successfully";
+                    serverMessage.style.cssText = "background-color: #d4edda; color:#1b5e20";
+                })
+                .catch(error => {
+                    serverMessage.innerHTML = error;
+                    serverMessage.style.cssText = "background-color: #f8d7da; color: b71c1c";
+                });
+        }
+
+
+        input.addEventListener("change", () => {
+            const files = input.files
+            for (let i = 0; i < files.length; i++) {
+                queuedImageArray.push(files[i])
+            }
+            queuedForm.reset()
+            displayQueuedImage()
+        })
+
+        inputDiv.addEventListener("drop", () => {
+            e.preventDefault()
+            const files = e.dataTransfer.files
+            for (let i = 0; i < files.length; i++) {
+                if (!files[i].type.match("image")) continue
+
+                if (queuedImageArray.every(image => image.name !== file[i].name)) {
+                    queuedImageArray.push(files[i])
+                }
+            }
+            displayQueuedImage()
+        })
+
+        function displayQueuedImage() {
+            let images = ""
+            queuedImageArray.forEach((image, index) => {
+                images += `<div class="image">
+                            <img src="${URL.createObjectURL(image)}" alt="image">
+                            <span onclick="deleteQueuedImage(${index})">&times;</span>
+                            </div>`
+            })
+            queuedDiv.innerHTML = images
+        }
+
+        function deleteQueuedImage(index) {
+            queuedImageArray.splice(index, 1)
+            displayQueuedImage()
+        }
+
+        queuedForm.addEventListener("submit", (e) => {
+            e.preventDefault()
+            sendQueuedImageToServer()
+        })
+
+        function sendQueuedImageToServer() {
+            const formData = new FormData(queuedForm)
+            queuedImageArray.forEach((image, index) => {
+                formData.append(`file[${index}]`, image)
+            })
+
+            fetch("upload", {
+                method: "POST",
+                body: formData
+            })
+
+
+                .then(response => {
+                    if (response.statusCode != 200) throw (response.statusText)
+                })
+
+                .catch(error => {
+                    serverMessage.innerHTML = error
+                    serverMessage.style.cssText = "background-color: #f8d7da; color: b71c1c"
+                })
+        }
+
+
+
+        function validateForm() {
+            var tagInput = document.getElementById("tags").value;
+            if (tagInput == "") {
+                alert("Enter a tag");
+                return false;
+            }
+            return true;
+        }
+
+    </script>
+</body>
+
+</html>

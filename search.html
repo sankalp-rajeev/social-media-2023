@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+    <link rel="stylesheet" href="frontend.css">
+    <script src="search.js"></script>
+</head>
+
+<body>
+    <header>
+        <nav class="navigation-bar">
+            <ul class="list-items">
+                <li class="item"><a href="explore.html">Explore</a></li>
+                <li class="item"><a href="photos.ejs">Photos</a></li>
+                <li class="item"><a href="album.html" class="active">Album</a></li>
+                <li class="item"><a href="search.html" class="active">Search</a></li>
+                <li class="item"><a href="/profile">Profile</a></li>
+                <li class="item"><button id="logout-btn" class="logout-button">Logout</button></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <h1>Search</h1>
+    <div class="search-container">
+        <div class="card" style="text-align:center; width:100%">
+            <div class="card-block" style="text-align:center">
+                <form class='search_form' action="/search.html" id="searchform" method=POST>
+                    <input type=text name="search_word" required size="50" maxlength=25 placeholder="search photoshare">
+                    <select name="search_type" form="searchform">
+                        <option value="photo">Photo</option>
+                        <option value="user" selected="selected">User</option>
+                        <option value="comment">Comment</option>
+                    </select>
+                    <button id="searchBtn" type="submit" class="search-btn">Search</button>
+                </form>
+            </div>
+        </div>
+
+        <!--  <input type="text" placeholder="Search...">
+        <button id="searchBtn" type="submit" class="search-btn">Search</button> -->
+    </div>
+    <div id="results"></div>
+    <div class="popular-tags-container">
+        <button type="button" onclick="showPopularTags()">Popular Tags</button>
+        <div id="popular-tags" style="display: none;">
+            <ul>
+                <li>#Cute</li>
+                <li>#Nature</li>
+                <li>#Dog</li>
+                <li>#cat</li>
+                <li>#Funny</li>
+            </ul>
+        </div>
+    </div>
+    <!-- <script>
+        function showPopularTags() {
+            var popularTags = document.getElementById("popular-tags");
+            if (popularTags.style.display === "none") {
+                popularTags.style.display = "block";
+            } else {
+                popularTags.style.display = "none";
+            }
+        }
+
+    </script> -->
+    <script>
+        document.getElementById("logout-btn").addEventListener("click", function() {
+            window.location.href = "/index.html";
+        });
+    </script>
+</body>
+
+</html>

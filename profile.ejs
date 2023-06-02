@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore</title>
+    <link rel="stylesheet" href="/photostyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+        integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous" />
+</head>
+
+<body>
+    <header>
+        <nav class="navigation-bar">
+            <ul class="list-items">
+                <li class="item"><a href="/explore.html">Explore</a></li>
+                <li class="item"><a href="/photos.ejs">Photos</a></li>
+                <li class="item"><a href="/album.html">Album</a></li>
+                <li class="item"><a href="/search.html">Search</a></li>
+                <li class="item"><a href="/profile" class="active">Profile</a></li>
+                <li class="item"><button id="logout-btn" class="logout-button">Logout</button></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <div class="user-stats">
+            <span class="user-name">
+                <%= user_name %>
+            </span>
+            <span class="followers">Friends: <%= followers %></span>
+        </div>
+        <div class="followers-list">
+            <h3>Friends:</h3>
+            <select>
+                <% followersList.forEach(function(follower) { %>
+                    <option><%= follower.first_name %> <%= follower.last_name %></option>
+                <% }); %>
+            </select>
+        </div>
+        <div class="top-contributors">
+            <h3>Top Contributors</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th class="rank">Rank</th>
+                  <th class="name">Name</th>
+                  <th class="contribution">Contribution Score</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% topContributors.forEach(function(contributor, index) { %>
+                  <tr>
+                    <td class="rank"><%= index + 1 %></td>
+                    <td class="name"><%= contributor.full_name %></td>
+                    <td class="contribution"><%= contributor.contribution %></td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+    </main>
+
+    <script>
+      document.getElementById("logout-btn").addEventListener("click", function() {
+          window.location.href = "/index.html";
+      });
+  </script>
+
+</body>
+
+</html>

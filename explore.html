@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore</title>
+    <link rel="stylesheet" href="frontend.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navigation-bar">
+            <ul class="list-items">
+                <li class="item"><a href="explore.html">Explore</a></li>
+                <li class="item"><a href="photos.ejs">Photos</a></li>
+                <li class="item"><a href="album.html" class="active">Album</a></li>
+                <li class="item"><a href="search.html">Search</a></li>
+                <li class="item"><a href="/profile/<%= user_id %>">Profile</a>
+                <li class="item"><button id="logout-btn" class="logout-button">Logout</button></li>
+
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <h1>Explore</h1>
+        <div class="photo-container">
+            <div class="photo">
+                <figure>
+                    <figcaption><a href="user.html">@iammeow</a></figcaption>
+                    <a href="pic.html"><img src="img1.jpeg" alt="Photo 1"></a>
+                    <div class="like-button">
+                        <i class="fa fa-heart-o like-icon"></i>
+                        <span class="like-count">0</span>
+                    </div>
+                    <div class="comment-section">
+                        <div class="comment-form">
+                            <input type="text" placeholder="Add a comment...">
+                            <button onclick="addComment(this)">Post</button>
+                            <!-- Add this button in the appropriate location -->
+                            
+
+                            <ul class="comment-list"></ul>
+                            <!-- <button onclick="deleteAllComments(this)">Remove Comments</button> -->
+                        </div>
+                        <div class="comments">
+                            <div class="comment">
+                                <strong>Tags:</strong>
+                                <span class="comment-text">#cat #meow</span>
+                            </div>
+                        </div>
+                    </div>
+                    <figcaption><a href="user.html">@puppylove</a></figcaption>
+                    <img src="img2.jpeg" alt="Photo 2">
+                    <div class="like-button">
+                        <i class="fa fa-heart-o like-icon"></i>
+                        <span class="like-count">0</span>
+                    </div>
+                    <div class="comment-form">
+                        <input type="text" placeholder="Add a comment...">
+                        <button onclick="addComment(this)">Post</button>
+                        <ul class="comment-list"></ul>
+                    </div>
+                    <div class="comments">
+                        <div class="comment">
+                            <strong>Tags:</strong>
+                            <span class="comment-text">#dogo #cute</span>
+                        </div>
+                    </div>
+
+                    <figcaption><a href="user.html">@shotbyiphone</a></figcaption>
+                    <img src="img3.jpeg" alt="Photo 3">
+                    <div class="like-button">
+                        <i class="fa fa-heart-o like-icon"></i>
+                        <span class="like-count">0</span>
+                    </div>
+                    <div class="comment-form">
+                        <input type="text" placeholder="Add a comment...">
+                        <button onclick="addComment(this)">Post</button>
+                        <ul class="comment-list"></ul>
+                    </div>
+                    <div class="comments">
+                        <div class="comment">
+                            <strong>Tags:</strong>
+                            <span class="comment-text">#nature #flower #pretty</span>
+                        </div>
+                    </div>
+
+                    <figcaption><a href="user.html">@realcountryroads</a></figcaption>
+                    <img src="img4.jpeg" alt="Photo 4">
+                    <div class="like-button">
+                        <i class="fa fa-heart-o like-icon"></i>
+                        <span class="like-count">0</span>
+                    </div>
+                    <div class="comment-form">
+                        <input type="text" placeholder="Add a comment...">
+                        <button onclick="addComment(this)">Post</button>
+                        <ul class="comment-list"></ul>
+                    </div>
+                    <div class="comments">
+                        <div class="comment">
+                            <strong>Tags:</strong>
+                            <span class="comment-text">#wow</span>
+                        </div>
+                    </div>
+
+                    <figcaption><a href="user.html">@foodlover</a></figcaption>
+                    <img src="img5.jpeg" alt="Photo 5">
+                    <div class="like-button">
+                        <i class="fa fa-heart-o like-icon"></i>
+                        <span class="like-count">0</span>
+                    </div>
+                    <div class="comment-form">
+                        <input type="text" placeholder="Add a comment...">
+                        <button onclick="addComment(this)">Post</button>
+                        <ul class="comment-list"></ul>
+                    </div>
+                    <div class="comments">
+                        <div class="comment">
+                            <strong>Tags:</strong>
+                            <span class="comment-text">#yum</span>
+                        </div>
+                    </div>
+                </figure>
+            </div>
+        </div>
+    </main>
+    <script>
+        document.getElementById("logout-btn").addEventListener("click", function() {
+            window.location.href = "/index.html";
+        });
+    </script>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

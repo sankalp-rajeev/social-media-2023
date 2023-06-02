@@ -1,0 +1,168 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albums</title>
+    <link rel="stylesheet" href="albumstyle.css">
+    <script src="album.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+<header>
+    <nav class="navigation-bar">
+        <ul class ="list-items">
+            <li class = "item"><a href="explore.html" >Explore</a></li>
+            <li class = "item"><a href="photos.ejs">Photos</a></li>
+            <li class = "item"><a href="album.html" class="active">Album</a></li>
+            <li class = "item"><a href="search.html">Search</a></li>
+            <li class = "item"><a href="/profile">Profile</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <h1>Albums</h1>
+    <div id="albums" class="album-container">
+         Existing albums will be displayed here -->
+<!-- </div>
+    <button onclick="createAlbum()">Create an Album +</button>
+</main>
+</body>
+</html>
+ -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Albums</title>
+    <link rel="stylesheet" href="albumstyle.css">
+    <script src="album.js"></script>
+</head>
+
+<body>
+    <header>
+
+        <nav class="navigation-bar">
+            <ul class="list-items">
+                <li class="item"><a href="explore.html">Explore</a></li>
+                <li class="item"><a href="photos.ejs">Photos</a></li>
+                <li class="item"><a href="album.html" class="active">Album</a></li>
+                <li class="item"><a href="search.html">Search</a></li>
+                <li class="item"><a href="profile.html">Profile</a></li>
+                <li class="item"><button id="logout-btn" class="logout-button">Logout</button></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Albums</h1>
+        <div id="albums" class="album-container">
+            <button onclick="createAlbum()">Create an Album +</button>
+        </div>
+
+        <!-- <div id="albums" class="album-container">
+         <button onclick="createAlbum()">Create an Album +</button>
+     </div> -->
+        <div id="albums" class="album-container">
+            <form id="upload-form">
+                <input type="file" id="file-input" multiple accept="image/png, image/jpeg, image/jpg">
+                <!-- <button type="submit">Upload</button> -->
+                <button type="submit" id="upload-button">Upload</button>
+
+            </form>
+        </div>
+
+    </main>
+    <script>
+        document.getElementById("logout-btn").addEventListener("click", function() {
+            window.location.href = "/index.html";
+        });
+    </script>
+    <div class="album" id="MyPhotos">
+        <h2>MyPhotos</h2>
+        <form id="upload-form" enctype="multipart/form-data">
+            <input type="hidden" name="album_id" value="10">
+            <input type="file" name="photos" multiple>
+            <button type="submit">Upload</button>
+        </form>
+        <a href="albumpics.html?album=MyPhotos">
+            <img src="https://www.russorizio.com/wp-content/uploads/2016/07/ef3-placeholder-image.jpg"
+                alt="Placeholder Image" style="width: 200px; height: 150px;">
+        </a>
+    </div>
+    
+    <script>
+        const uploadButton = document.querySelector("#upload-button");
+        uploadButton.addEventListener("click", handleUpload);
+
+        const uploadForm = document.querySelector("#upload-form");
+        const fileInput = document.querySelector("#file-input");
+
+        uploadForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+
+            const formData = new FormData();
+            for (let i = 0; i < fileInput.files.length; i++) {
+                formData.append("images", fileInput.files[i]);
+            }
+
+            fetch("/upload", {
+                method: "POST",
+                body: formData,
+            })
+                .then((response) => {
+                    if (!response.ok) {
+                        throw new Error(`Upload failed with status ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then((data) => {
+                    console.log(data);
+                    // Display the uploaded images
+                })
+                .catch((error) => {
+                    console.error(error);
+                    // Display an error message
+                });
+        });
+        function handleUpload(event) {
+            event.preventDefault();
+
+            const formData = new FormData(uploadForm);
+            const fileInputs = formData.getAll("images");
+
+            // Loop through the selected files
+            for (let i = 0; i < fileInputs.length; i++) {
+                const file = fileInputs[i];
+                const album = "MyPhotos"; // Specify the album to add the file to
+                formData.append("images", file);
+            }
+
+            // Set up the request to upload the file to the server
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "/upload");
+            xhr.setRequestHeader("X-Album", album);
+
+            xhr.onload = function () {
+                if (xhr.status === 200) {
+                    console.log("File uploaded successfully");
+
+                    // Refresh the album display to show the new photo
+                    displayAlbum(album);
+                } else {
+                    console.error(`Error uploading file: ${xhr.statusText}`);
+                }
+            };
+
+            // Send the request to upload the files to the server
+            xhr.send(formData);
+        }
+
+
+    </script>
+
+</body>
+
+</html>
