@@ -3,9 +3,9 @@ Introduction
 Developed as a group project for CSE 412 Database Management class, this social media photo-sharing application provides an extensive platform for users to interact, share, and engage with multimedia content. Collaborators for this project include:
 
 Sankalp Rajeev
-@Mudit Arora
-@Dipanshu Singh
-@Tyler Hazbutel
+Mudit Arora
+Dipanshu Singh
+Tyler Hazbutel
 Features
 1. User Management:
 Registration: New users can register by providing personal details like first name, last name, email address, date of birth, and password. Email uniqueness is enforced to avoid duplicates.
@@ -34,3 +34,5 @@ To be added based on the technologies and methods used.
 Conclusion
 This project showcases a comprehensive approach to database management, user interaction, and social media functionalities.
 Feel free to explore, fork, or contribute to this initiative. Feedback is always appreciated!
+This is the link to the vide demonstration : https://www.youtube.com/watch?v=JONdeJ6hhk0&ab_channel=MuditArora
+
