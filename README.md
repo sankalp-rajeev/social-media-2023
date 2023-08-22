@@ -1,38 +1,49 @@
-Social Media Photo Share App (2023)
-Introduction
-Developed as a group project for CSE 412 Database Management class, this social media photo-sharing application provides an extensive platform for users to interact, share, and engage with multimedia content. Collaborators for this project include:
+# Social Media Photo Share App (2023)
 
-Sankalp Rajeev
-Mudit Arora
-Dipanshu Singh
-Tyler Hazbutel
-Features
-1. User Management:
-Registration: New users can register by providing personal details like first name, last name, email address, date of birth, and password. Email uniqueness is enforced to avoid duplicates.
-Friend Management: Users can add friends, search for other users, and view friend lists.
-Top Contributors: The platform showcases the top 10 users based on their contributions - calculated by the sum of uploaded photos and comments.
-Authentication: Supports secure user login and logout.
-2. Album & Photo Management:
-Browsing: Allows users to browse through all public photos & albums, or specifically view their own.
-Creation & Deletion: Post registration, users can create albums, upload photos, and have the flexibility to delete them. Deleting a non-empty album also removes its photos.
- User ownership is checked for editing or deleting operations.
-Photo Data: Supports storage of binary image files or file location.
-4. Tag Management:
-Personalized Tag View: Users can view their photos categorized by tags, creating a virtual album experience.
-Global Tag View: View photos based on tags across the platform.
-Popular Tags: Displays the most popular tags and their associated photos.
-Photo Search: Allows searching through photos using conjunctive tag queries.
-5. Comments & Likes:
-Engagement: Users can leave comments and 'like' photos. Engagement metrics contribute to the user's overall contribution score.
-Search Comments: Implemented a search based on comments. Returns users who've used the exact query in their comments, ordered by comment frequency.
-6. Recommendations:
-Friend Suggestions: Using the 'friends-of-friends' methodology, the system recommends potential friends to users.
-Photo Recommendations: Based on the user's photo tags, the system suggests other relevant photos. Recommendations are based on tag matches and overall tag count.
-Tech Stack & Implementation Details
-To be added based on the technologies and methods used.
+## Introduction
 
-Conclusion
-This project showcases a comprehensive approach to database management, user interaction, and social media functionalities.
-Feel free to explore, fork, or contribute to this initiative. Feedback is always appreciated!
-This is the link to the vide demonstration : https://www.youtube.com/watch?v=JONdeJ6hhk0&ab_channel=MuditArora
+Developed as a group project for CSE 412 Database Management class, this social media photo-sharing application offers a comprehensive platform for users to interact, share, and engage with multimedia content. Collaborators for this project include:
 
+- **Sankalp Rajeev**
+- **Mudit Arora**
+- **Dipanshu Singh**
+- **Tyler Hazbutel**
+
+## Features
+
+### 1. **User Management**:
+- **Registration**: Users can register by entering their details: first name, last name, email address, date of birth, and password. Duplicates based on email are prevented.
+- **Friend Management**: Abilities include adding friends, searching for users, and viewing friend lists.
+- **Top Contributors**: The platform highlights the top 10 contributors based on their sum of uploaded photos and comments.
+- **Authentication**: Features secure user login/logout processes.
+
+### 2. **Album & Photo Management**:
+- **Browsing**: Users can peruse all public photos & albums or just their own.
+- **Creation & Deletion**: Once registered, users can initiate albums, upload photos, and opt to delete them. Deleting an album with content removes its photos. Only the rightful owner can modify or erase albums/photos.
+- **Photo Data**: The platform supports storage either as binary image files or file paths.
+
+### 3. **Tag Management**:
+- **Personalized Tag View**: Allows users to see their photos by tags, effectively creating a virtual album experience.
+- **Global Tag View**: Users can view all photos categorized by specific tags.
+- **Popular Tags**: Showcases the most widely used tags and associated photos.
+- **Photo Search**: Facilitates photo search using conjunctive tag queries.
+
+### 4. **Comments & Likes**:
+- **Engagement**: Users can engage by commenting and "liking" photos. These metrics contribute to a user's overall activity score.
+- **Search Comments**: This feature lets users search based on comments. Results display users who have matched the query in their comments, organized by frequency.
+
+### 5. **Recommendations**:
+- **Friend Suggestions**: Uses the 'friends-of-friends' approach to recommend potential friends to users.
+- **Photo Recommendations**: The system suggests photos based on a user's tags. Recommendations are derived from tag matches and the total tag count.
+
+## Tech Stack & Implementation Details
+
+*Details will be added in line with the adopted technologies and methods.*
+
+## Conclusion
+
+The project epitomizes an in-depth approach to database management, user interactivity, and social media capabilities. 
+
+**[Video Demonstration](https://www.youtube.com/watch?v=JONdeJ6hhk0&ab_channel=MuditArora)**
+
+*Feel free to explore, fork, contribute, or share your feedback. We appreciate your involvement and insights!*
